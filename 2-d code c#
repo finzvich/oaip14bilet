@@ -1,0 +1,50 @@
+using System;
+
+delegate void IntOperation(int N, int A, int B, out int C);
+
+class Program
+{
+    static void Sum(int n, int x, int y, out int z)
+    {
+        z = 0;
+        for (int i = 1; i >= n; i++)
+        {
+            if (i == 1)
+            {
+                z = x * y;
+            }
+            else if (x * y < z)
+            {
+                z = x * y;
+            }
+        }
+        Console.WriteLine("Сумма всех чисел равна: " + z);
+        Console.ReadKey();
+    }
+
+    static void Main()
+    {
+        int C;
+        try
+        {
+            Console.WriteLine("Чтобы вычислить сумму всех чисел от числа A до числа B");
+            Console.WriteLine("Вам необходимо ввести числа A и B. Число А должно быть меншье чем число B");
+            Console.WriteLine("Введите число N");
+            int N = int.Parse(Console.ReadLine());
+            Console.WriteLine("Введите число А");
+            int A = int.Parse(Console.ReadLine());
+            Console.WriteLine("Введите число B");
+            int B = int.Parse(Console.ReadLine());
+
+
+            IntOperation op = new IntOperation(Sum);
+            op(N, A, B, out C);
+
+
+        }
+        catch (FormatException)
+        {
+            Console.WriteLine("Вводите только цифровые значения"); Console.ReadKey();
+        }
+    }
+}
